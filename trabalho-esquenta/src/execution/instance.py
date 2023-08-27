@@ -3,6 +3,36 @@ import time
 from utils.logger import logger
 from utils import get_data_from_file
 
+class Instance:
+    def __init__(self, algorithm):
+        self.algorithm = algorithm
+        self.dataset = dataset
+        self.execution_time = None
+
+    def set_dataset(self, dataset):
+        self.dataset = dataset
+
+    def set_input(self, input):
+        self.input = input
+
+    def get_params(self):
+        params = [self.dataset]
+
+        if isinstance(self.input, list):
+            params.extend(self.input)
+        else:
+            params.append(self.input)
+
+    def execute(self):
+        params = self.get_params()
+        print(params)
+
+        # start = time.time()
+        # self.algorithm.run(self.get_params())
+        # end = time.time()
+        # self.execution_time = end - start
+        # self.log()
+
 class ExecutionInstance:
     def __init__(self):
         self.id = uuid.uuid4()
