@@ -3,6 +3,13 @@ from utils.logger import logger
 from execution import ExecutionInstance, Dataset, DatasetGroup, DatasetGroupCollection
 from utils import get_data_from_file, File, Folder
 
+# table that writes fast to csv
+
+class Table:
+    def __init__(self, name):
+        self.name = name
+
+
 # def test():
 #     dataset_collection = DatasetGroupCollection()
 #     groups = dataset_collection.get_groups()
