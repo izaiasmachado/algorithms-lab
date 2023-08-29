@@ -1,0 +1,5 @@
+from algorithms.linear_search import linear_search_fast_return, linear_search_slow_return
+from algorithms.binary_search import binary_search
+from algorithms.ternary_search import ternary_search
+from algorithms.quadratic_search import quadratic_search
+from algorithms.cubic_search import cubic_search

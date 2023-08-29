@@ -6,6 +6,7 @@ from utils import get_data_from_file, Folder
 class Dataset:
     def __init__(self, file):
         self.set_file(file)
+        self.data = self.get_data()
 
     def set_file(self, file):
         self.file = file
@@ -35,6 +36,9 @@ class Dataset:
         file = self.get_file()
         file_path = file.get_path()
         file_name = file.get_name()
+        
+        if hasattr(self, "data"):
+            return self.data
 
         file_full_path = f'{file_path}/{file_name}'
         data = get_data_from_file(file_full_path)
@@ -63,7 +67,7 @@ class DatasetGroup:
         datasets = []
         files = self.folder.get_files_from_directory()
         text_files = list(filter(lambda file: file.get_name().endswith(".txt"), files))
-        sorted_text_files = sorted(files, key=lambda file: int(file.get_name().replace(".txt", "")))
+        sorted_text_files = sorted(text_files, key=lambda file: int(file.get_name().replace(".txt", "")))
 
         for file in sorted_text_files:
             dataset = Dataset(file)

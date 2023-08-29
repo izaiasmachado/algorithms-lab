@@ -6,9 +6,13 @@ from utils import get_data_from_file
 
 class Instance:
     def __init__(self, algorithm, dataset):
+        self.uuid = uuid.uuid4()
         self.algorithm = algorithm
         self.dataset = dataset
         self.input = None
+
+    def get_uuid(self):
+        return self.uuid
 
     def get_algorithm(self):
         return self.algorithm
@@ -51,6 +55,10 @@ class Instance:
 
     def get_execution_time(self):
         return self.execution_time
+
+    def complexity_steps(self):
+        dataset_size = self.dataset.get_input_size()
+        return self.algorithm.get_steps(dataset_size)
 
 class InstanceExecutor:
     def __init__(self, algorithm_collection, dataset_collection):
