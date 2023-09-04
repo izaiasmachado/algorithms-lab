@@ -33,16 +33,15 @@ class SearchAlgorithmsInstanceExecutor(InstanceExecutor):
             for algorithm in self.algorithm_collection.get_algorithms():
                 for _ in range(10):
                     algorithm_name = algorithm.get_name()
-                    is_binary_search = algorithm_name == "Binary Search - Middle Element" or algorithm_name == "Binary Search - First Element" 
-                    is_ternary_search = algorithm_name == "Ternary Search"
+                    is_binary_search = "Binary Search" in algorithm_name
+                    is_ternary_search = "Ternary Search" in algorithm_name
                     should_create_unsorted_instance = dataset.get_dataset_type() == "unsorted"
 
                     if (is_ternary_search or is_binary_search) and should_create_unsorted_instance:
                         continue
                 
                     instance = Instance(algorithm, dataset)
-                    too_much_memory_usage = instance.complexity_steps() > 1000000000 
-                    # 2500000000
+                    too_much_memory_usage = instance.complexity_steps() > 10000000000 # 10 billion
 
                     if too_much_memory_usage:
                         continue
@@ -57,7 +56,10 @@ class SearchAlgorithmsInstanceExecutor(InstanceExecutor):
             first_index = 0
             middle_index = int(len(dataset_data)/2)
             
-            should_input_first_element = algorithm_name == "Binary Search - First Element"
+            is_binary_search = "Binary Search" in algorithm_name
+            is_ternary_search = "Ternary Search" in algorithm_name
+            is_first_element = "First Element" in algorithm_name
+            should_input_first_element = (is_binary_search or is_ternary_search) and is_first_element
             element_index = first_index if should_input_first_element else middle_index
             
             input_element = dataset_data[element_index]
@@ -97,13 +99,16 @@ if __name__ == "__main__":
     algorithm_collection = AlgorithmCollection()
     dataset_group_collection = DatasetGroupCollection()
 
-    algorithm_collection.add_algorithm("Linear Search - v1", linear_search_fast_return, o_n)
-    algorithm_collection.add_algorithm("Linear Search - v2", linear_search_slow_return, o_n)
+    # algorithm_collection.add_algorithm("Linear Search - v1", linear_search_fast_return, o_n)
+    # algorithm_collection.add_algorithm("Linear Search - v2", linear_search_slow_return, o_n)
+
     algorithm_collection.add_algorithm("Binary Search - Middle Element", binary_search, o_log_n)
     algorithm_collection.add_algorithm("Binary Search - First Element", binary_search, o_log_n)
-    algorithm_collection.add_algorithm("Ternary Search", ternary_search, o_log_n)
-    algorithm_collection.add_algorithm("Quadratic Search", quadratic_search, o_n_squared)
-    algorithm_collection.add_algorithm("Cubic Search", cubic_search, o_n_cubed)
+    algorithm_collection.add_algorithm("Ternary Search - Middle Element", ternary_search, o_log_n)
+    algorithm_collection.add_algorithm("Ternary Search - First Element", ternary_search, o_log_n)
+
+    # algorithm_collection.add_algorithm("Quadratic Search", quadratic_search, o_n_squared)
+    # algorithm_collection.add_algorithm("Cubic Search", cubic_search, o_n_cubed)
 
     executor = SearchAlgorithmsInstanceExecutor(algorithm_collection, dataset_group_collection)
     executor.execute()

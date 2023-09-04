@@ -1,6 +1,6 @@
-def linear_search_fast_return(array, element):
+def linear_search_fast_return(array, target):
     for i, element in enumerate(array):
-        if array[i] == element:
+        if element == target:
             return i
     
     return -1

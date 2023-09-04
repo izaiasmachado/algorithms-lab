@@ -23,7 +23,8 @@ def generate_unsorted_dataset(size):
                 file.write(f"{string_row}\n")
 
 if __name__ == "__main__":
-    folder_path = "trabalho-esquenta/data/unsorted"
+    # folder_path = "search_algorithms/data/sorted"
+    folder_path = "search_algorithms/data/unsorted"
     files_in_directory = os.listdir(folder_path)
 
     for file_name in files_in_directory:
@@ -35,4 +36,3 @@ if __name__ == "__main__":
 
         print(f"Generating dataset for {number}...")
         generate_unsorted_dataset(number)
-
