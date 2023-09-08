@@ -1,0 +1,1 @@
+from algorithms.find_max_value import find_max_value_v1, find_max_value_v2
