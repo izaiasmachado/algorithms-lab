@@ -45,13 +45,14 @@ class Instance:
 
         tracemalloc.start()
         start = time.time()
-        self.algorithm.run(*params)
+        self.output = self.algorithm.run(*params)
         end = time.time()
 
         _, self.peak_memory_usage = tracemalloc.get_traced_memory()
         tracemalloc.stop()
 
         self.execution_time = end - start
+        return self.output
 
     def get_execution_time(self):
         return self.execution_time

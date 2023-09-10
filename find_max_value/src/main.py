@@ -24,7 +24,7 @@ class SearchAlgorithmsInstanceExecutor(InstanceExecutor):
         sorted_instances = sorted(self.instances, key=lambda instance: instance.complexity_steps())
 
         for i, instance in enumerate(sorted_instances):
-            instance.execute()
+            output = instance.execute()
 
             uuid = instance.get_uuid()
             dataset = instance.get_dataset()
@@ -41,8 +41,9 @@ class SearchAlgorithmsInstanceExecutor(InstanceExecutor):
             logger.info(f"Complexity Steps: {complexity_steps}")
 
             with open(f'data/output.csv', 'a') as file:
-                file.write(f"{uuid},{dataset_type},{algorithm_name},{dataset_name},{formated_execution_time},{formated_peak_memory_usage},{complexity_steps}\n")
+                file.write(f"{uuid},{dataset_type},{algorithm_name},{dataset_name},{formated_execution_time},{formated_peak_memory_usage},{complexity_steps},{output}\n")
 
+            logger.info(f"Output: {output}")
             logger.info(f"Execution Time: {formated_execution_time}")
             logger.info(f"Peak Memory Usage: {formated_peak_memory_usage}")
             logger.info(f'{"-" * 50}')

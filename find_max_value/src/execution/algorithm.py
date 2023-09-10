@@ -8,7 +8,7 @@ class Algorithm:
         return self.name
 
     def run(self, *args):
-        self.function(*args)
+        return self.function(*args)
 
     def get_steps(self, n):
         return self.complexity(n)
