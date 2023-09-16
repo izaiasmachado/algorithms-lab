@@ -13,7 +13,7 @@ def generate_unsorted_dataset(size):
         row_columns_count = 10 if not shorter_line else size % 10
 
         for j in range(row_columns_count):
-            generated_random_number = random.randint(0, size)
+            generated_random_number = random.randint(0, 999)
             row.append(generated_random_number)
 
         string_row = ",".join(str(x) for x in row)
@@ -23,7 +23,7 @@ def generate_unsorted_dataset(size):
                 file.write(f"{string_row}\n")
 
 if __name__ == "__main__":
-    # folder_path = "search_algorithms/data/sorted"
+    # folder_path = "search_algorithms/data/sorted"`
     folder_path = "search_algorithms/data/unsorted"
     files_in_directory = os.listdir(folder_path)
 
